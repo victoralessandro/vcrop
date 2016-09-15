@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html, body{
+            background-color: lightBlue;
+            font-family: "Lucida Console";
+      }
+    </style>
+</head>
+<body>
+	<h1>VCrop - Crop image</h1>
+    <input type="file" id="input"/>
+    <input type="button" id="crop" value="SAVE"/>
+    <div id="result"></div>
+    <script src="vCrop.min.js"></script>
+    <script type="text/javascript">
+    	var crop = new VCrop({
+    		'width': 500,
+    		'height': 500,
+    		'selector': {
+    			'width': 200,
+    			'height': 112.5
+    		},
+    		'container': document.body,
+    		'resizable': true,
+    		'aspectRatio': '16:9'
+    	});
+
+    	var input = document.getElementById('input');
+        input.addEventListener('change', function (e) {
+    		crop.setImage(e.target.files[0]);
+        });
+
+        var button = document.getElementById('crop');
+        button.addEventListener('click', function() {
+            var image = new Image();
+            image.id = "pic"
+            image.src = crop.crop();
+            document.getElementById('result').appendChild(image);
+        });  
+    	
+    </script>
+</body>
+</html>
